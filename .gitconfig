@@ -1,0 +1,6 @@
+[pull]
+	rebase = false
+
+[user]
+	name = Chris Nguyen
+	email = cuong-nguyen@users.noreply.github.com
