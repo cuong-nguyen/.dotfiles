@@ -5,12 +5,8 @@ tap "homebrew/core"
 brew "deno"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# User-friendly command-line shell for UNIX-like operating systems
-brew "fish"
 # GitHub command-line tool
 brew "gh"
-# Open-source build automation tool based on the Groovy and Kotlin DSL
-brew "gradle"
 # Powerful, lightweight programming language
 brew "lua"
 # Just-In-Time Compiler (JIT) for the Lua programming language
