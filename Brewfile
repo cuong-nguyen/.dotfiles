@@ -3,6 +3,8 @@ tap "homebrew/cask"
 tap "homebrew/core"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # User-friendly command-line shell for UNIX-like operating systems
 brew "fish"
 # GitHub command-line tool
