@@ -1,5 +1,3 @@
-# generate by 'brew bundle dump --describe'
-
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
@@ -21,5 +19,7 @@ brew "tree-sitter"
 brew "neovim"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
 # Cross-shell prompt for astronauts
 brew "starship"
