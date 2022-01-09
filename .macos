@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+# ~/.macos — https://mths.be/macos
+# Run without downloading:
+# curl https://raw.githubusercontent.com/cuong-nguyen/.dotfiles/master/.macos | bash
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Ask for the administrator password upfront
+sudo -v
+
+echo "Hello $(whoami)! Let me set you up"
+
+echo "Creating *code* folder"
+mkdir -p "${HOME}/code"
+
+echo "Installing homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+echo "Brew installing stuffs"
+brew install git gh
+
+echo "Cloning dotfiles"
+gh repo clone cuong-nguyen/.dotfiles $HOME
+ln -s "${HOME}/.dotfiles/.config" $HOME
+ln -s "${HOME}/.dotfiles/.vimrc" $HOME
+ln -s "${HOME}/.dotfiles/.zshrc" $HOME
+ln -s "${HOME}/.dotfiles/.macos" $HOME
+ln -s "${HOME}/.dotfiles/.gitconfig" $HOME
+
+###############################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+###############################################################################
+
+# Trackpad: enable tap to click for this user and for the login screen
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# enable three finger drag on trackpad
+defaults write http://com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -int 1
+defaults write http://com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -int 1
+
+# Disable press-and-hold for keys in favor of key repeat
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# Automatically hide and show the Dock
+defaults write com.apple.dock autohide -bool true
+
