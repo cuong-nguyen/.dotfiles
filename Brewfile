@@ -1,12 +1,15 @@
+# generate by `brew bundle dump --describe [--force]`
+# reinstall by `brew bundle --file <Brewfile path>`
+#
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-# Secure runtime for JavaScript and TypeScript
-brew "deno"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
 # GitHub command-line tool
 brew "gh"
+# Distributed revision control system
+brew "git"
 # Powerful, lightweight programming language
 brew "lua"
 # Just-In-Time Compiler (JIT) for the Lua programming language

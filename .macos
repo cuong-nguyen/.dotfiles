@@ -20,7 +20,7 @@ echo "Installing homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo "Brew installing stuffs"
-brew install git gh
+brew bundle --file "${HOME}/.config/Brewfile"
 
 echo "Cloning dotfiles"
 gh repo clone cuong-nguyen/.dotfiles $HOME
