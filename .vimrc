@@ -1,7 +1,7 @@
 set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
-set smartindent
+set autoindent
 
 " Auto source vimrc file located in working dir, e.g. `vim ...workding dir...`
 set exrc 
@@ -49,6 +49,7 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'ryanoasis/vim-devicons'
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -56,6 +57,27 @@ let g:NERDTreeHijackNetrw = 0
 let g:netrw_browse_split = 0
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+
+" coc extensions
+let g:coc_global_extensions = [
+      \ 'coc-tsserver',
+      \ 'coc-prettier',
+      \ 'coc-eslint',
+      \ ]
+" from README
+" if hidden is not set, TextEdit might fail
+set hidden
 
 colorscheme gruvbox
 highlight Normal guibg=none
@@ -80,6 +102,13 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 
 " trigger autocomplete box
 inoremap <silent><expr> <C-space> coc#refresh()
+nmap <silent> gd <Plug>(coc-definition)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
 " Telescope search
 nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
@@ -88,7 +117,6 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 " Use Tab key to select autocomplete item
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
-" lsp provider to find the cursor word definition and reference
-" post install (yarn install | npm install) then load plugin only for editing supported files
-nnoremap <silent> gh <cmd>lua require'lspsaga.provider'.lsp_finder()<CR>
-
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
