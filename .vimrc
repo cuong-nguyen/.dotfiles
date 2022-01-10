@@ -25,6 +25,9 @@ set signcolumn=yes
 " Column at max characters
 set colorcolumn=80
 
+" highlight current line
+set cursorline
+
 " vim-plug =======================================================
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -49,6 +52,11 @@ Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
+let g:NERDTreeHijackNetrw = 0
+let g:netrw_browse_split = 0
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+
 colorscheme gruvbox
 highlight Normal guibg=none
 
@@ -68,7 +76,7 @@ augroup END
 let mapleader = " "
 
 " nnoremap <leader>b :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 
 " trigger autocomplete box
 inoremap <silent><expr> <C-space> coc#refresh()
