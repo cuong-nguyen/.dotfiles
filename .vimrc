@@ -46,7 +46,6 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'ryanoasis/vim-devicons'
-Plug 'glepnir/lspsaga.nvim' " cursor word definition and reference
 
 call plug#end()
 
