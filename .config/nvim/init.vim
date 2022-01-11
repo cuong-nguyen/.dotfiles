@@ -5,10 +5,14 @@ source ~/.vimrc
 lua << EOF
   require('telescope').setup{
     defaults = {
-      -- file_ignore_patterns = {"node_modules"},
-      file_sorter = require('telescope.sorters').get_fzy_sorter,
+      prompt_prefix = "@ ",
+      layout_config = {
+        prompt_position = "top"
+      },
+      sorting_strategy = "ascending"
     }
   }
+  require("telescope").load_extension "fzf"
 EOF
 
 lua << EOF

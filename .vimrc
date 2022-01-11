@@ -38,6 +38,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-lua/plenary.nvim' " Telescope dependency
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'gruvbox-community/gruvbox' " Color scheme
@@ -49,7 +50,6 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary' " comment stuff out
 Plug 'ryanoasis/vim-devicons'
-Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
 
@@ -71,6 +71,7 @@ endfunction
 
 " coc extensions
 let g:coc_global_extensions = [
+      \ 'coc-pairs',
       \ 'coc-tsserver',
       \ 'coc-prettier',
       \ 'coc-eslint',
@@ -82,10 +83,13 @@ set hidden
 colorscheme gruvbox
 highlight Normal guibg=none
 
+" setup Prettier command
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " Run Prettier before buffer is updated e.g. on Save
 augroup fmt
   autocmd!
-  autocmd BufWritePre *.js,*.mjs,*.ts,*.tsx,*.json,*.css,*.scss,*.md,*.html Prettier
+  autocmd BufWritePre *.* Prettier
 augroup END
 
 " """"""""""""""""""""""""""""""""""" REMAP """"""""""""""""""""""""""""""""""""
@@ -110,9 +114,12 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Telescope search
-nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+" nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
 
 " Use Tab key to select autocomplete item
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
