@@ -2,6 +2,11 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! lua vim.highlight.on_yank { higroup='IncSearch', timeout=200 }
+augroup END
+
 lua << EOF
   require('telescope').setup{
     defaults = {
@@ -15,21 +20,3 @@ lua << EOF
   require("telescope").load_extension "fzf"
 EOF
 
-lua << EOF
-  local lsp_installer = require "nvim-lsp-installer"
-
-  -- Include the servers you want to have installed by default below
-  local servers = {
-    "tsserver",
-  }
-
-  for _, name in pairs(servers) do
-    local server_is_found, server = lsp_installer.get_server(name)
-    if server_is_found then
-      if not server:is_installed() then
-        print("Installing " .. name)
-        server:install()
-      end
-    end
-  end
-EOF
