@@ -6,28 +6,31 @@ call plug#begin()
 
 if has("nvim")
   Plug 'neovim/nvim-lspconfig'
+
+  " nvim lsp UI extension
+  Plug 'glepnir/lspsaga.nvim'
+
+  " Fuzzy finder
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+  " Telescope dependency
+  Plug 'nvim-lua/plenary.nvim'
+
+  " We recommend updating the parsers on update
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  
+  " Code completion
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+  " Status bar
+  " Plug 'vim-airline/vim-airline'
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
 endif
-
-" Fuzzy finder
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-
-" Telescope dependency
-Plug 'nvim-lua/plenary.nvim'
-
-" We recommend updating the parsers on update
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Theme color
 Plug 'gruvbox-community/gruvbox'
-
-" Code completion
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Status bar
-" Plug 'vim-airline/vim-airline'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
 
 " Comment stuff out
 Plug 'tpope/vim-commentary'
@@ -36,7 +39,7 @@ Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 
 Plug 'tpope/vim-surround'
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
