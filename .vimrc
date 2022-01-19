@@ -28,31 +28,6 @@ set colorcolumn=80
 " highlight current line
 set cursorline
 
-" vim-plug =======================================================
-let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
-if empty(glob(data_dir . '/autoload/plug.vim'))
-  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-
-Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-lua/plenary.nvim' " Telescope dependency
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
-Plug 'gruvbox-community/gruvbox' " Color scheme
-Plug 'neovim/nvim-lspconfig' " Language Server Protocol support, e.g. Typescript,..
-Plug 'williamboman/nvim-lsp-installer' " LSP servers installer
-Plug 'neoclide/coc.nvim', {'branch': 'release'} " Code completion
-Plug 'vim-airline/vim-airline' " Status bar
-Plug 'preservim/nerdtree'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary' " comment stuff out
-Plug 'ryanoasis/vim-devicons'
-
-call plug#end()
-
 let g:NERDTreeHijackNetrw = 0
 let g:netrw_browse_split = 0
 let g:netrw_banner = 0
@@ -72,7 +47,6 @@ endfunction
 " coc extensions
 let g:coc_global_extensions = [
       \ 'coc-pairs',
-      \ 'coc-tsserver',
       \ 'coc-prettier',
       \ 'coc-eslint',
       \ ]
@@ -94,11 +68,6 @@ augroup END
 
 " """"""""""""""""""""""""""""""""""" REMAP """"""""""""""""""""""""""""""""""""
 
-" remap (mode mapFrom mapTo) ====================================
-" n = normal mode
-" nore = no recursive execution
-" map = map
-
 let mapleader = " "
 
 " nnoremap <leader>b :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
@@ -106,7 +75,6 @@ nnoremap <leader>t :NERDTreeToggle<CR>
 
 " trigger autocomplete box
 inoremap <silent><expr> <C-space> coc#refresh()
-nmap <silent> gd <Plug>(coc-definition)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -114,16 +82,10 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Find files using Telescope command-line sugar.
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-" nnoremap <C-p> :lua require('telescope.builtin').find_files()<CR>
-
 " Use Tab key to select autocomplete item
 inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
