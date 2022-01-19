@@ -28,25 +28,10 @@ set colorcolumn=80
 " highlight current line
 set cursorline
 
+set encoding=UTF-8
+
 let g:NERDTreeHijackNetrw = 0
 let g:netrw_browse_split = 0
 let g:netrw_banner = 0
 let g:netrw_winsize = 25
-
-" """"""""""""""""""""""""""""""""""" REMAP """"""""""""""""""""""""""""""""""""
-
-let mapleader = " "
-
-" nnoremap <leader>b :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <leader>t :NERDTreeToggle<CR>
-
-" trigger autocomplete box
-inoremap <silent><expr> <C-space> coc#refresh()
-
-" Use Tab key to select autocomplete item
-inoremap <expr> <Tab> pumvisible() ? coc#_select_confirm() : "<Tab>"
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 

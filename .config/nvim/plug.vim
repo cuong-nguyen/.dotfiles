@@ -8,7 +8,7 @@ if has("nvim")
   Plug 'neovim/nvim-lspconfig'
 
   " nvim lsp UI extension
-  Plug 'glepnir/lspsaga.nvim'
+  Plug 'tami5/lspsaga.nvim', { 'branch': 'nvim6.0' }
 
   " Fuzzy finder
   Plug 'nvim-telescope/telescope.nvim'
@@ -24,8 +24,9 @@ if has("nvim")
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
   " Status bar
-  " Plug 'vim-airline/vim-airline'
   Plug 'nvim-lualine/lualine.nvim'
+
+  " Icons (for any buffer related, e.g. Telescope)
   Plug 'kyazdani42/nvim-web-devicons'
 endif
 
@@ -39,7 +40,10 @@ Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 
 Plug 'tpope/vim-surround'
-" Plug 'ryanoasis/vim-devicons'
+
+" Icons (for Nerdtree) kyazdani42 folk does not work with Nerdtree
+Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 call plug#end()
 
